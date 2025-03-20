@@ -1,0 +1,3 @@
+[environments.dev]
+store = "test-store-artur"
+path = "."
