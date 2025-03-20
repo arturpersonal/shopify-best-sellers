@@ -13,12 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # ✅ Debugging step to check if secrets are set properly
-      - name: Debug Secrets
-        run: |
-          echo "Store: ${{ secrets.SHOP_STORE_OS2 }}"
-          echo "Access Token: ${{ secrets.SHOP_ACCESS_TOKEN }}"
-          echo "Pull Theme: ${{ secrets.SHOP_PULL_THEME }}"
       - name: Lighthouse
         uses: shopify/lighthouse-ci-action@v1
         with:

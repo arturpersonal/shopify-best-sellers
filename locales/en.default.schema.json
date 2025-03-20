@@ -3,5 +3,18 @@
     "global": {
       "settings": {}
     }
+  },
+  "sections": {
+    "best_sellers": {
+      "name": "Best Sellers",
+      "settings": {
+        "headers": {
+          "product": "Products"
+        },
+        "products": {
+          "label": "Select Products"
+        }
+      }
+    }
   }
 }

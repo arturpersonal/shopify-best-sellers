@@ -1,0 +1,25 @@
+<div class="container mx-auto px-4">Best Seller Content</div>
+
+{% schema %}
+{
+  "name": "t:sections.best_sellers.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.best_sellers.settings.headers.product"
+    },
+    {
+      "type": "product_list",
+      "id": "best-seller-products",
+      "label": "t:sections.best_sellers.settings.products.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.best_sellers.name"
+    }
+  ]
+}
+{% endschema %}
