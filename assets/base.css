@@ -1,0 +1,30 @@
+.carousel__content::-webkit-scrollbar {
+  height: 4px;
+  margin-top: 4px;
+}
+.carousel__content img,
+.carousel__content a {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.carousel__content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.carousel__content::-webkit-scrollbar-thumb {
+  background: #231f20;
+  border-radius: 10px;
+}
+.carousel__content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@media (max-width: 767px) {
+  .product-card:nth-child(n + 5) {
+    display: none;
+  }
+
+  .show-all .product-card {
+    display: block;
+  }
+}
