@@ -18,6 +18,7 @@
     {% endif %}
 
     {% render 'meta-tags' %}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'tailwind.css' | asset_url | stylesheet_tag }}
 
     {{ content_for_header }}
