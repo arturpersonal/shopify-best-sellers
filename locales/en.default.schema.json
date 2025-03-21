@@ -9,10 +9,26 @@
       "name": "Best Sellers",
       "settings": {
         "headers": {
-          "product": "Products"
+          "product": "Products",
+          "card": "Product Card"
+        },
+        "title": {
+          "label": "Title",
+          "default": "Best Sellers"
         },
         "products": {
           "label": "Select Products"
+        },
+        "card": {
+          "best_seller_badge": {
+            "label": "Enable best seller badge",
+            "title": "Badge Text",
+            "default": "Best Seller"
+          },
+          "discount_badge": {
+            "label": "Enable discount badge",
+            "info": "The badge will only be displayed for products where the metafield 'discount' has a selected value."
+          }
         }
       }
     }
