@@ -1,4 +1,78 @@
-<div class="container mx-auto px-4">Best Seller Content</div>
+<script src="{{ 'slider.js' |  asset_url }}" defer></script>
+
+<div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
+  <h2 class="text-3xl font-bold mb-8 text-center md:text-left">{{ section.settings.title }}</h2>
+  <custom-slider>
+    <div class="carousel__wrapper">
+      <div class="carousel__content md:pb-12 gap-6 grid md:flex md:overflow-x-auto grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4">
+        {% for product in section.settings['best-seller-products'] %}
+          <a href="{{ product.url }}" class="product-card snap-start shrink-0 w-full md:w-[calc(21%-12px)]">
+            <div class="block rounded-[10px] overflow-hidden select-none aspect-square relative group">
+              {{
+                product.featured_image
+                | image_url: width: 800
+                | image_tag:
+                  class: 'select-none h-full object-cover object-top transition-opacity duration-500 ease-in-out group-hover:opacity-0'
+              }}
+              {{
+                product.images[1]
+                | image_url: width: 800
+                | image_tag:
+                  class: 'select-none h-full object-cover object-top absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100'
+              }}
+              <div class="absolute top-0 left-0 w-full h-full p-2 flex justify-between items-start">
+                {% if section.settings.best_seller_badge and section.settings.badge_title != blank %}
+                  <span class="rounded-xl text-[8px] md:text-[10px] bg-white p-1 border uppercase">
+                    {{- section.settings.badge_title -}}
+                  </span>
+                {% endif %}
+                {% if section.settings.discount_badge and product.metafields.custom.discount %}
+                  <span class="md:mr-2 block rounded-xl text-[8px] md:text-[10px] bg-[#5C7962] text-white p-1 border border-black uppercase">
+                    Save {{ product.metafields.custom.discount }}%
+                  </span>
+                {% endif %}
+              </div>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-base md:text-lg font-normal">{{ product.title }}</h3>
+              <div class="flex items-center mt-2">
+                <div class="flex">
+                  {% assign review_rating = product.metafields.custom.review_rating.value %}
+                  {% assign review_count = product.metafields.custom.review_count %}
+                  {% assign max = review_rating.scale_max | round %}
+                  {% assign rating = review_rating.rating | round %}
+
+                  {% for i in (1..max) %}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-3 h-3"
+                      fill="{%- if i <= rating -%}#000 {%- else -%}none{%- endif -%}"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1"
+                    >
+                      <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {% endfor %}
+                </div>
+                {% if review_count and review_rating %}
+                  <span class="ml-2 text-xs text-[#707070]">({{ review_count }} reviews)</span>
+                {% endif %}
+              </div>
+              <p class="text-base md:text-lg mt-2">{{ product.price | money_with_currency }}</p>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+      <button
+        id="showAllBtn"
+        class="mt-3 block md:hidden font-semibold text-base bg-black text-white rounded-full w-full p-4"
+      >
+        Show More
+      </button>
+    </div>
+  </custom-slider>
+</div>
 
 {% schema %}
 {
@@ -7,6 +81,12 @@
   "class": "section",
   "settings": [
     {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.best_sellers.settings.title.label",
+      "default": "t:sections.best_sellers.settings.title.default"
+    },
+    {
       "type": "header",
       "content": "t:sections.best_sellers.settings.headers.product"
     },
@@ -14,6 +94,29 @@
       "type": "product_list",
       "id": "best-seller-products",
       "label": "t:sections.best_sellers.settings.products.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.best_sellers.settings.headers.card"
+    },
+    {
+      "type": "checkbox",
+      "id": "best_seller_badge",
+      "label": "t:sections.best_sellers.settings.card.best_seller_badge.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "t:sections.best_sellers.settings.card.best_seller_badge.title",
+      "default": "t:sections.best_sellers.settings.card.best_seller_badge.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "discount_badge",
+      "label": "t:sections.best_sellers.settings.card.discount_badge.label",
+      "default": true,
+      "info": "t:sections.best_sellers.settings.card.discount_badge.info"
     }
   ],
   "presets": [
