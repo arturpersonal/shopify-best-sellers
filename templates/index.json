@@ -12,9 +12,31 @@
     "main": {
       "type": "index-section",
       "settings": {}
+    },
+    "best_sellers_H49YH9": {
+      "type": "best-sellers",
+      "settings": {
+        "title": "Best Sellers",
+        "best-seller-products": [
+          "z37f0f80cd9670a99307az",
+          "sw1911",
+          "hbcv00005uq82s",
+          "hbcv000065yo40",
+          "hbcv00006ed9wz",
+          "100006884-cream-blue-multi",
+          "hbcv00005maq62",
+          "hbcv00005pv84w",
+          "farfetch-22370812",
+          "hbcv000069x84l"
+        ],
+        "best_seller_badge": true,
+        "badge_title": "Best Seller",
+        "discount_badge": true
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "best_sellers_H49YH9"
   ]
 }
